@@ -4,6 +4,8 @@ import { api } from "../api.js";
 
 export default function NewPage() {
   const nav = useNavigate();
+  // This state represents the title text entered by the user.
+// It changes when the user types in the title input, and the UI updates automatically.
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("active");
