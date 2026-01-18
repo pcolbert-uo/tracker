@@ -17,6 +17,9 @@ export default function NewPage() {
   // This state represents whether the new entry should be marked as important.
   // When it changes, the UI updates the ON/OFF display automatically.
   const [isImportant, setIsImportant] = useState(false);
+  const [tags, setTags] = useState([]);
+  const [newTag, setNewTag] = useState("");
+
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -81,6 +84,42 @@ export default function NewPage() {
         <p style={{ marginTop: 8 }}>
           Important is currently: <strong>{isImportant ? "ON" : "OFF"}</strong>
         </p>
+        <div style={{ marginTop: 16 }}>
+      <label>
+        New tag:
+    <input
+      type="text"
+      value={newTag}
+      onChange={(e) => setNewTag(e.target.value)}
+      style={{ marginLeft: 8 }}
+    />
+  </label>
+
+  <button
+    type="button"
+    style={{ marginLeft: 8 }}
+    onClick={() => {
+      if (newTag.trim() !== "") {
+        setTags([...tags, newTag.trim()]);
+        setNewTag("");
+      }
+    }}
+  >
+      Add tag
+    </button>
+  </div>
+
+    {tags.length > 0 && (
+  <div style={{ marginTop: 12 }}>
+    <strong>Tags:</strong>
+    <ul>
+      {tags.map((tag, index) => (
+        <li key={index}>{tag}</li>
+      ))}
+    </ul>
+  </div>
+)}
+
 
         {error ? <div className="alert">{error}</div> : null}
 
